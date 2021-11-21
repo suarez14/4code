@@ -10,7 +10,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_register.*
@@ -21,6 +23,8 @@ class RegisterActivity : AppCompatActivity() {
 
     // autenticación con firebase
     private lateinit var auth: FirebaseAuth;
+    private lateinit var database: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
 
 
 
@@ -30,7 +34,9 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-        auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.reference.child("Users")
 
 
 
@@ -61,6 +67,18 @@ class RegisterActivity : AppCompatActivity() {
 
                                             auth.createUserWithEmailAndPassword(editTextRegisterEmail.text.toString(), editTextRegisterPassword.text.toString()).addOnCompleteListener(this) { task ->
                                                 if (task.isSuccessful) {
+
+                                                    val user: FirebaseUser = auth.currentUser!!
+                                                    verifyEmail(user);
+                                                    val currentUserDb = databaseReference.child(user.uid)
+                                                    currentUserDb.child("firstName").setValue(editTextRegisterName.text.toString())
+                                                    currentUserDb.child("lastName").setValue(editTextRegisterLastName.text.toString())
+                                                    currentUserDb.child("phone").setValue(editTextRegisterPhone.text.toString())
+                                                    currentUserDb.child("email").setValue(editTextRegisterEmail.text.toString())
+
+
+
+
                                                     Toast.makeText(this, "registro exitoso", Toast.LENGTH_SHORT).show()
                                                     val intent = Intent(this, HomeActivity::class.java)
                                                     startActivity(intent)
@@ -97,28 +115,32 @@ class RegisterActivity : AppCompatActivity() {
             }
 
         }
-        //register()
     }
-    // funcion que ejecuta el registro al oprimir el boton
-    /* private fun register() {
-         buttonRegisterRegister.setOnClickListener {
-             auth.createUserWithEmailAndPassword(editTextRegisterEmail.text.toString(), editTextRegisterPassword.text.toString())
-                 .addOnCompleteListener(this) { task ->
-                     if (task.isSuccessful) {
-                         val intent = Intent(this, HomeActivity::class.java)
-                         startActivity(intent)
-                     } else {
-                         Toast.makeText(this, "An error occurred", Toast.LENGTH_SHORT).show()
-                     }
 
-                 }
+    private fun verifyEmail(user: FirebaseUser) {
+        user.sendEmailVerification()
+            .addOnCompleteListener(this) {
+//Verificamos que la tarea se realizó correctamente
+                    task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this,
+                        "Email " + user.getEmail(),
+                        Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this,
+                        "Error al verificar el correo ",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
 
-         }*/
+    }
+
 
     private fun isEmail(texto:String):Boolean {
         val emailPattern: Pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
         val emailMatcher: Matcher = emailPattern.matcher(texto)
         return emailMatcher.find()
+
     }
     private fun isPasswoord(texto:String):Boolean {
         val passwordPattern: Pattern = Pattern.compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}\$")
@@ -139,6 +161,7 @@ class RegisterActivity : AppCompatActivity() {
         }catch (e:Exception){
             return false
         }
+
     }
 
 }

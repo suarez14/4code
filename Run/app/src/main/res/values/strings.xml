@@ -17,9 +17,7 @@
     <string name="signUp">SignUp</string>
     <string name="google">Google</string>
     <string name="facebook">Facebook</string>
-
-
-
+    <string name="prefs_file">com.example.run.PREFERENCE_FILE_KEY</string>
 
 
     Already Have an Account?
