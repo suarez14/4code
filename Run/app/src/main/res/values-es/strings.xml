@@ -1,2 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Run</string>
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="register">Registro</string>
+    <string name="descripcionLogo">Logo Run</string>
+    <string name="login">Ingresar</string>
+    <string name="forgetPassword">¿olvido su contraseña?</string>
+    <string name="rememberMe">Recuerda Me</string>
+    <string name="name">Nombre</string>
+    <string name="lastName">Apellido</string>
+    <string name="phone">Telefono</string>
+    <string name="confirmPassword">Confirmar Contraseña</string>
+    <string name="alreadyHaveAnAccount">¿Ya tienes una cuenta? </string>
+    <string name="acceptPolicies">Acepto las politicas</string>
+    <string name="dontAccount">¿No tiene una cuenta? </string>
+    <string name="signUp"> Registrarse</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="prefs_file">com.example.run.PREFERENCE_FILE_KEY</string>
+    <string name="passwordCharacter">La contraseña debe tener más de 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. \ n NO puede tener otros símbolos.</string>
+    <string name="wrongEmail">Email Incorrecto</string>
+    <string name="emptyField">Todos Los campos son obligatorios</string>
+    <string name="wrongEmailPassword">Email o password incorrecto</string>
+    <string name="passwordSame">Las contraseñas debe ser iguales</string>
+    <string name="writeName">Escriba su Nombre</string>
+    <string name="writeLastName">Escriba su Apellido</string>
+    <string name="writePhone">Esciba su Telefono</string>
+    <string name="acceptPolicies1">Acepte las politicas</string>
+    <string name="emailRegistered">El correo ya esta registrado</string>
+    <string name="successfulRegistration">Registrado correctamente</string>
+    <string name="verifymail">Error al verificar el correo </string>
+    <string name="forgotPassword">Olvido su</string>
+    <string name="forgotPassword2">Contraseña?</string>
+    <string name="yourEmail">Escriba su correo registrado</string>
+    <string name="send">Enviar</string>
+
+
+</resources>
