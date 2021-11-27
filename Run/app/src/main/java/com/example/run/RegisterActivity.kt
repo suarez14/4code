@@ -1,30 +1,25 @@
 package com.example.run
 
-import android.content.Context
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
 
-    // autenticación con firebase
-    private lateinit var auth: FirebaseAuth;
+
+    private lateinit var auth: FirebaseAuth
+    private val db = FirebaseFirestore.getInstance()
+
     var cbxAcceptPolicy:Boolean = false
     var btnOkPolicy:Boolean = false
     var policyFrag : Fragment? = null
@@ -33,12 +28,10 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        auth = FirebaseAuth.getInstance()
 
-
-        auth = FirebaseAuth.getInstance();
         linlay_policy_container.isVisible = false
         linlay_policy_container.isEnabled = false
-
 
         // funcion que lleva a login  con el boton login
         textViewRegisterLogin.setOnClickListener {
@@ -47,78 +40,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         buttonRegisterRegister.setOnClickListener {
-            if (!cbxAcceptPolicy){
-                buttonRegisterRegister.isEnabled = false
-                linlay_policy_container.isVisible = true
-                linlay_policy_container.isEnabled = true
-                //policyFrag = FragmentPolicy.newInstance("","")
-                //loadPolicyFragment(policyFrag as FragmentPolicy)
-            }else{
-                if (editTextRegisterName.text.isNotEmpty() && editTextRegisterLastName.text.isNotEmpty() && editTextRegisterPhone.text.isNotEmpty() && editTextRegisterEmail.text.isNotEmpty()
-                    && editTextRegisterPassword.text.isNotEmpty() && editTextRegisterConfirmPassword.text.isNotEmpty()){
-
-                    if (isEmail(editTextRegisterEmail.text.toString()) == true) {
-
-                        if (isPasswoord(editTextRegisterPassword.text.toString()) == true) {
-
-                            if (editTextRegisterPassword.text.toString() == editTextRegisterConfirmPassword.text.toString()) {
-
-                                if (isWord(editTextRegisterName.text.toString()) == true) {
-
-                                    if(isWord(editTextRegisterLastName.text.toString()) == true) {
-
-                                        if(isNumber(editTextRegisterPhone.text.toString()) == true) {
-
-                                            if (cbxAcceptPolicy) {
-                                            //if (checkBoxRegisterPolitics.isChecked()) {
-
-                                                auth.createUserWithEmailAndPassword(editTextRegisterEmail.text.toString(), editTextRegisterPassword.text.toString()).addOnCompleteListener(this) { task ->
-                                                    if (task.isSuccessful) {
-                                                        Toast.makeText(this, "registro exitoso", Toast.LENGTH_SHORT).show()
-                                                        val intent = Intent(this, HomeActivity::class.java)
-                                                        startActivity(intent)
-                                                    }else {
-                                                        Toast.makeText(this, "El correo ya se encuentra registrado", Toast.LENGTH_SHORT).show()
-                                                    }
-                                                }
-
-                                            }else{
-                                                Toast.makeText(this, "Debe Aceptar las politcas", Toast.LENGTH_SHORT).show()
-                                            }
-
-                                        }else {
-                                            Toast.makeText(this, "Escriba su telefono", Toast.LENGTH_SHORT).show()
-                                        }
-                                    }else {
-                                        Toast.makeText(this, "Escriba sus Apellidos", Toast.LENGTH_SHORT).show()
-                                    }
-                                }else{
-                                    Toast.makeText(this, "Escriba sus Nombres", Toast.LENGTH_SHORT).show()
-                                }
-                            }else{
-                                Toast.makeText(this, "las contraseñas debe ser iguales", Toast.LENGTH_SHORT).show()
-                            }
-                        }else{
-                            Toast.makeText(this, "La contraseña debe tener mas de 8 caracteres , al menos un dígito, al menos una minúscula y al menos una mayúscula.\n" +
-                                    "NO puede tener otros símbolos.", Toast.LENGTH_LONG).show()
-                        }
-                    } else {
-                        Toast.makeText(this, "email incorrecto", Toast.LENGTH_SHORT).show()
-                    }
-                }else{
-                    Toast.makeText(this, "ingresa informacion en todos los campos", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        }
-
-        /*
-        buttonRegisterRegister.setOnClickListener {
-            if (!cbxAcceptPolicy){
-                buttonRegisterRegister.isEnabled = false
-                linlay_policy_container.isVisible = true
-                linlay_policy_container.isEnabled = true
-            }
             if (editTextRegisterName.text.isNotEmpty() && editTextRegisterLastName.text.isNotEmpty() && editTextRegisterPhone.text.isNotEmpty() && editTextRegisterEmail.text.isNotEmpty()
                 && editTextRegisterPassword.text.isNotEmpty() && editTextRegisterConfirmPassword.text.isNotEmpty()){
 
@@ -134,69 +55,77 @@ class RegisterActivity : AppCompatActivity() {
 
                                     if(isNumber(editTextRegisterPhone.text.toString()) == true) {
 
-                                        if (checkBoxRegisterPolitics.isChecked()) {
+                                        if (cbxAcceptPolicy) {
 
                                             auth.createUserWithEmailAndPassword(editTextRegisterEmail.text.toString(), editTextRegisterPassword.text.toString()).addOnCompleteListener(this) { task ->
                                                 if (task.isSuccessful) {
-                                                    Toast.makeText(this, "registro exitoso", Toast.LENGTH_SHORT).show()
+
+                                                    val user: FirebaseUser = auth.currentUser!!
+                                                    verifyEmail(user)
+                                                    Toast.makeText(this , getString(R.string.successfulRegistration), Toast.LENGTH_SHORT).show()
+                                                    db.collection("users").document(user.uid).set(
+                                                        hashMapOf("firstName" to editTextRegisterName.text.toString(),"lastName" to editTextRegisterLastName.text.toString(),
+                                                        "phone" to editTextRegisterPhone.text.toString(),"email" to editTextRegisterEmail.text.toString()))
                                                     val intent = Intent(this, HomeActivity::class.java)
                                                     startActivity(intent)
+
                                                 }else {
-                                                    Toast.makeText(this, "El correo ya se encuentra registrado", Toast.LENGTH_SHORT).show()
+                                                    Toast.makeText(this , getString(R.string.emailRegistered), Toast.LENGTH_SHORT).show()
                                                 }
                                             }
 
                                         }else{
-                                            Toast.makeText(this, "Debe Aceptar las politcas", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(this , getString(R.string.acceptPolicies1), Toast.LENGTH_SHORT).show()
+                                            linlay_policy_container.isVisible = true
+                                            linlay_policy_container.isEnabled = true
                                         }
 
                                     }else {
-                                        Toast.makeText(this, "Escriba su telefono", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(this , getString(R.string.writePhone), Toast.LENGTH_SHORT).show()
                                     }
                                 }else {
-                                    Toast.makeText(this, "Escriba sus Apellidos", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this , getString(R.string.writeLastName), Toast.LENGTH_SHORT).show()
                                 }
                             }else{
-                                Toast.makeText(this, "Escriba sus Nombres", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this , getString(R.string.writeName), Toast.LENGTH_SHORT).show()
                             }
                         }else{
-                            Toast.makeText(this, "las contraseñas debe ser iguales", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this , getString(R.string.passwordSame), Toast.LENGTH_SHORT).show()
                         }
                     }else{
-                        Toast.makeText(this, "La contraseña debe tener mas de 8 caracteres , al menos un dígito, al menos una minúscula y al menos una mayúscula.\n" +
-                                "NO puede tener otros símbolos.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this , getString(R.string.passwordCharacter), Toast.LENGTH_LONG).show()
                     }
                 } else {
-                    Toast.makeText(this, "email incorrecto", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this , getString(R.string.wrongEmail), Toast.LENGTH_SHORT).show()
                 }
             }else{
-                Toast.makeText(this, "ingresa informacion en todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this , getString(R.string.emptyField), Toast.LENGTH_SHORT).show()
+
+
             }
 
         }
-        */
-        //register()
     }
-    // funcion que ejecuta el registro al oprimir el boton
-    /* private fun register() {
-         buttonRegisterRegister.setOnClickListener {
-             auth.createUserWithEmailAndPassword(editTextRegisterEmail.text.toString(), editTextRegisterPassword.text.toString())
-                 .addOnCompleteListener(this) { task ->
-                     if (task.isSuccessful) {
-                         val intent = Intent(this, HomeActivity::class.java)
-                         startActivity(intent)
-                     } else {
-                         Toast.makeText(this, "An error occurred", Toast.LENGTH_SHORT).show()
-                     }
 
-                 }
+    private fun verifyEmail(user: FirebaseUser) {
+        user.sendEmailVerification()
+            .addOnCompleteListener(this) {
+                    task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this , getString(R.string.email) + user.getEmail(), Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(this, "Email " + user.getEmail(), Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this , getString(R.string.verifymail), Toast.LENGTH_SHORT).show()
 
-         }*/
+                }
+            }
+    }
 
     private fun isEmail(texto:String):Boolean {
         val emailPattern: Pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
         val emailMatcher: Matcher = emailPattern.matcher(texto)
         return emailMatcher.find()
+
     }
     private fun isPasswoord(texto:String):Boolean {
         val passwordPattern: Pattern = Pattern.compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}\$")
@@ -210,30 +139,27 @@ class RegisterActivity : AppCompatActivity() {
         return wordMatcher.find()
 
     }
-    private fun isNumber(texto:String):Boolean{
+    private fun isNumber(texto:String):Boolean {
+        val numberPattern: Pattern = Pattern.compile("[\\d]{10}")
+        val numberMatcher: Matcher = numberPattern.matcher(texto)
+        return numberMatcher.find()
+
+    }
+
+    /*private fun isNumber(texto:String):Boolean{
         try {
-            texto.toInt()
+            texto.toLong()
             return true
         }catch (e:Exception){
             return false
         }
-    }
 
-    private fun loadPolicyFragment(fragmentPolicy: Fragment) {
-        var manag: FragmentManager = supportFragmentManager
-        var transac: FragmentTransaction = manag.beginTransaction()
-        transac.replace(R.id.fragment_policy, fragmentPolicy)
-        transac.commit()
-    }
+    }*/
 
     fun onClickBtnOkPolicy(view: android.view.View) {
         linlay_policy_container.isVisible = false
         linlay_policy_container.isEnabled = false
-        buttonRegisterRegister.isEnabled = true
-        if (cbxAcceptPolicy){
-            //buttonRegisterRegister.isEnabled = true
-
-        }else {
+        if (!cbxAcceptPolicy){
             Toast.makeText(this, "Please accept the privacy policy.", Toast.LENGTH_SHORT).show()
         }
     }
