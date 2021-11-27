@@ -25,7 +25,7 @@
     <string name="passwordSame">Las contraseñas debe ser iguales</string>
     <string name="writeName">Escriba su Nombre</string>
     <string name="writeLastName">Escriba su Apellido</string>
-    <string name="writePhone">Esciba su Telefono</string>
+    <string name="writePhone">Esciba un numero celular o fijo valido de 10 digitos</string>
     <string name="acceptPolicies1">Acepte las politicas</string>
     <string name="emailRegistered">El correo ya esta registrado</string>
     <string name="successfulRegistration">Registrado correctamente</string>

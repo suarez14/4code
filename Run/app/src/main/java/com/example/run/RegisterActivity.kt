@@ -7,8 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -17,25 +16,19 @@ class RegisterActivity : AppCompatActivity() {
 
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: FirebaseDatabase
-    private lateinit var databaseReference: DatabaseReference
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
-        databaseReference = database.reference.child("Users")
-
 
         // funcion que lleva a login  con el boton login
         textViewRegisterLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-
 
         buttonRegisterRegister.setOnClickListener {
             if (editTextRegisterName.text.isNotEmpty() && editTextRegisterLastName.text.isNotEmpty() && editTextRegisterPhone.text.isNotEmpty() && editTextRegisterEmail.text.isNotEmpty()
@@ -60,14 +53,13 @@ class RegisterActivity : AppCompatActivity() {
 
                                                     val user: FirebaseUser = auth.currentUser!!
                                                     verifyEmail(user)
-                                                    val currentUserDb = databaseReference.child(user.uid)
-                                                    currentUserDb.child("firstName").setValue(editTextRegisterName.text.toString())
-                                                    currentUserDb.child("lastName").setValue(editTextRegisterLastName.text.toString())
-                                                    currentUserDb.child("phone").setValue(editTextRegisterPhone.text.toString())
-                                                    currentUserDb.child("email").setValue(editTextRegisterEmail.text.toString())
                                                     Toast.makeText(this , getString(R.string.successfulRegistration), Toast.LENGTH_SHORT).show()
+                                                    db.collection("users").document(user.uid).set(
+                                                        hashMapOf("firstName" to editTextRegisterName.text.toString(),"lastName" to editTextRegisterLastName.text.toString(),
+                                                        "phone" to editTextRegisterPhone.text.toString(),"email" to editTextRegisterEmail.text.toString()))
                                                     val intent = Intent(this, HomeActivity::class.java)
                                                     startActivity(intent)
+
                                                 }else {
                                                     Toast.makeText(this , getString(R.string.emailRegistered), Toast.LENGTH_SHORT).show()
                                                 }
@@ -136,14 +128,21 @@ class RegisterActivity : AppCompatActivity() {
         return wordMatcher.find()
 
     }
-    private fun isNumber(texto:String):Boolean{
+    private fun isNumber(texto:String):Boolean {
+        val numberPattern: Pattern = Pattern.compile("[\\d]{10}")
+        val numberMatcher: Matcher = numberPattern.matcher(texto)
+        return numberMatcher.find()
+
+    }
+
+    /*private fun isNumber(texto:String):Boolean{
         try {
-            texto.toInt()
+            texto.toLong()
             return true
         }catch (e:Exception){
             return false
         }
 
-    }
+    }*/
 
 }
