@@ -34,6 +34,6 @@
     <string name="forgotPassword2">Contraseña?</string>
     <string name="yourEmail">Escriba su correo registrado</string>
     <string name="send">Enviar</string>
-
+    <string name="default_web_client_id_auth">38474448794-b9sek0vs3gd1lg6k38cgkuf73dohdplc.apps.googleusercontent.com</string>
 
 </resources>
