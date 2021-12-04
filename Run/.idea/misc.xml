@@ -3,22 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/btn_bg.xml" value="0.283984375" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/button_rounded.xml" value="0.283984375" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/button_rounded_border.xml" value="0.283984375" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/ic_facebook.xml" value="0.283984375" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/ic_person.xml" value="0.283984375" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/ic_phone.xml" value="0.283984375" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/input_bg.xml" value="0.1640625" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/socialbutton_rounded.xml" value="0.283984375" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/splashscreen.xml" value="0.283984375" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_Login.xml" value="0.28306159420289856" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_home.xml" value="0.1331293037490436" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
-        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_register.xml" value="0.271875" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.75" />
-        <entry key="app/src/main/res/layout/fragment_policy.xml" value="0.259375" />
+        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/ic_facebook.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/drawable/ic_password.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_forgot.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_home.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/alber/Documents/Programacion/ciclo 4 desarrollo android/Run/app/src/main/res/layout/activity_register.xml" value="0.2151268115942029" />
+        <entry key="app/src/main/res/drawable-anydpi-v24/ic_signout.xml" value="0.38125" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.296195652173913" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/app_bar.xml" value="0.296195652173913" />
+        <entry key="app/src/main/res/layout/content_home.xml" value="0.296195652173913" />
+        <entry key="app/src/main/res/layout/fragment_policy.xml" value="0.2520833333333333" />
+        <entry key="app/src/main/res/layout/nav_header.xml" value="0.296195652173913" />
+        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.3651041666666667" />
       </map>
     </option>
   </component>

@@ -159,9 +159,12 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegisterRegister"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword"
+        app:layout_constraintVertical_bias="0.052" />
 
     <Button
         android:id="@+id/buttonRegisterRegister"
@@ -187,8 +190,12 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonRegisterRegister"
-        tools:layout_editor_absoluteX="25dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textViewRegisterAlreadyHave"
@@ -215,13 +222,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.478">
 
         <fragment
             android:id="@+id/fragment_policy"
+            android:name="com.example.run.FragmentPolicy"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.example.run.FragmentPolicy"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

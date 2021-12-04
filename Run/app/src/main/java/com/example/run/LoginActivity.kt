@@ -101,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
             if (task.isSuccessful){
                 val user = auth.currentUser        //validar si esta el usario activo
                 updateUI(user)
+                //val intent = Intent(this, HomeActivity::class.java)
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
 
