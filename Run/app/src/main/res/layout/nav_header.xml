@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:id="@+id/nav_header"
     android:fitsSystemWindows="true"
-    android:background="@drawable/orange">
+    android:background="@drawable/orange"
+    tools:ignore="MissingClass">
 
     <ImageView
         android:layout_marginTop="14dp"
@@ -34,12 +35,28 @@
         tools:layout_editor_absoluteY="235dp"
         tools:ignore="MissingConstraints" />
 
+
+    <!-- Nombre de usuario-->
     <TextView
+        android:id="@+id/user_name"
+        android:layout_width="269dp"
+        android:layout_height="wrap_content"
+        android:text="Example Ex"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold" />/>
+
+    <!-- Correo de usuario-->
+    <TextView
+        android:id="@+id/user_email"
         android:layout_width="269dp"
         android:layout_height="wrap_content"
         android:text="example@gmail.com"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>

@@ -50,8 +50,7 @@
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterRegister"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegisterRegister" />
 
     <EditText
         android:id="@+id/editTextRegisterLastName"
@@ -73,8 +72,7 @@
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterName"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterName" />
 
     <EditText
         android:id="@+id/editTextRegisterPhone"
@@ -96,8 +94,7 @@
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterLastName"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterLastName" />
 
     <EditText
         android:id="@+id/editTextRegisterEmail"
@@ -120,8 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPhone"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPhone" />
 
     <EditText
         android:id="@+id/editTextRegisterPassword"
@@ -143,8 +139,7 @@
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterEmail"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterEmail" />
 
     <EditText
         android:id="@+id/editTextRegisterConfirmPassword"
@@ -164,35 +159,28 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegisterRegister"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.052" />
 
     <Button
         android:id="@+id/buttonRegisterRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/button_rounded"
         android:text="@string/register"
         android:textColor="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxRegisterPolitics" />
-
-    <CheckBox
-        android:id="@+id/checkBoxRegisterPolitics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/acceptPolicies"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterConfirmPassword"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.787" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -202,8 +190,12 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonRegisterRegister"
-        tools:layout_editor_absoluteX="25dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textViewRegisterAlreadyHave"
@@ -221,4 +213,24 @@
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linlay_policy_container"
+        android:layout_width="323dp"
+        android:layout_height="390dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.478">
+
+        <fragment
+            android:id="@+id/fragment_policy"
+            android:name="com.example.run.FragmentPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

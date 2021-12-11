@@ -14,13 +14,12 @@
         android:layout_height="45dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/button_rounded"
-        android:text="Send"
+        android:text="@string/send"
         android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextForgotEmail"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextForgotEmail" />
 
     <EditText
         android:id="@+id/editTextForgotEmail"
@@ -34,7 +33,7 @@
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Type Your Email"
+        android:hint="@string/yourEmail"
         android:inputType="textEmailAddress"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -42,8 +41,7 @@
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewForgotMessage2"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewForgotMessage2" />
 
     <TextView
         android:id="@+id/textViewForgotMessage"
@@ -52,10 +50,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="Forgot Your"
+        android:text="@string/forgotPassword"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -67,10 +66,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:text="Password?"
+        android:text="@string/forgotPassword2"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

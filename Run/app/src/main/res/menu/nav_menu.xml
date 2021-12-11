@@ -22,10 +22,9 @@
             app:showAsAction="never"
             />
     </group>
-
     <item
         android:id="@+id/op2Nav"
-        android:icon="@drawable/ic_singout"
+        android:icon="@drawable/ic_signout"
         android:iconTint="@color/white"
         android:title="@string/logout"
         app:showAsAction="always"

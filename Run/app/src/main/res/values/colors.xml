@@ -7,8 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="orange">#B55F04</color>
-    <color name="orangeLigh">#EDAA63</color>
+    <color name="orange">#EA7B05</color>
     <color name="colorPrimaryDark">#3262C4</color>
+    <color name="privacyBkgnd">#7986CB</color>
 
 </resources>
