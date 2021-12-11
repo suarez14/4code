@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.296195652173913" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/app_bar.xml" value="0.296195652173913" />
+        <entry key="app/src/main/res/layout/bike_card_view.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/bike_card_view_grid.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bike_list_items.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_home.xml" value="0.296195652173913" />
         <entry key="app/src/main/res/layout/fragment_items.xml" value="0.20052083333333334" />

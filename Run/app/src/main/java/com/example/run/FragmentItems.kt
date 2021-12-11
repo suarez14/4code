@@ -7,9 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -29,6 +33,8 @@ class FragmentItems : Fragment() {
     private lateinit var myAdapter: RecyclerView.Adapter<ItemListAdapter.MyViewHolder>
 
     private lateinit var db:FirebaseFirestore
+    private lateinit var products: BikeList
+    private lateinit var productsList: MutableList<Bike>
 
     var TAG = ""
 
@@ -43,6 +49,7 @@ class FragmentItems : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
         db = FirebaseFirestore.getInstance()
+        productsList = ArrayList<Bike>()
     }
 
     override fun onCreateView(
@@ -57,45 +64,33 @@ class FragmentItems : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var myBikeNames: ArrayList<String> = ArrayList()
-//        myBikeNames.add("CB 175")
-//        myBikeNames.add("Vespa 150")
-//        myBikeNames.add("HD 450")
-//        myBikeNames.add("CB 175")
-//        myBikeNames.add("Vespa 150")
-//        myBikeNames.add("HD 450")
-//        myBikeNames.add("CB 175")
-//        myBikeNames.add("Vespa 150")
-//        myBikeNames.add("HD 450")
-
-        var myBikeMakes: ArrayList<String> = ArrayList()
-//        myBikeMakes.add("Honda")
-//        myBikeMakes.add("Piaggio")
-//        myBikeMakes.add("Harley Davison")
-//        myBikeMakes.add("Honda")
-//        myBikeMakes.add("Piaggio")
-//        myBikeMakes.add("Harley Davison")
-//        myBikeMakes.add("Honda")
-//        myBikeMakes.add("Piaggio")
-//        myBikeMakes.add("Harley Davison")
-
-        db.collection("users")
+        db.collection("MotosTest")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    myBikeNames.add(document.get("firstName").toString())
-                    myBikeMakes.add(document.get("email").toString())
+                    var bike:Bike = Bike(document.getString("Nombre")!!,
+                                         document.getString("Marca")!!,
+                                         document.getLong("Modelo")!!.toInt(),
+                                         document.getLong("Kilometraje")!!.toInt(),
+                                         document.getString("Cilindraje")!!,
+                                         document.getLong("Precio")!!.toInt(),
+                                         document.getString("URLFoto")!!)
+                    productsList.add(bike)
                 }
+                products = BikeList(productsList)
                 var info: Bundle = Bundle()
-                info.putStringArrayList("names", myBikeNames)
-                info.putStringArrayList("makes", myBikeMakes)
-
+                info.putParcelable("products", products)
+                Toast.makeText(context, "So far, so good...", Toast.LENGTH_LONG).show()
                 listRecyclerView = requireView().findViewById(R.id.recyclerItemsList)
                 myAdapter = ItemListAdapter(activity as AppCompatActivity, info)
 
                 listRecyclerView.setHasFixedSize(true)
+//                val layoutManagerLin = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+//                listRecyclerView.layoutManager = layoutManagerLin
+                val layoutManagerGrid = GridLayoutManager(context,2)
+                listRecyclerView.layoutManager = layoutManagerGrid
                 listRecyclerView.adapter = myAdapter
-                listRecyclerView.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
+//                listRecyclerView.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.")
