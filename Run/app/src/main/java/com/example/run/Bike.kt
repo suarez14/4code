@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Bike(
+    var id: String,
     var nombre: String,
     var marca: String,
     var modelo: Int,

@@ -34,6 +34,9 @@ class ItemListAdapter(context: AppCompatActivity,
         var textViewBikeMake = holder.layout.findViewById<TextView>(R.id.textViewMake2)
         textViewBikeMake.text = bikeList.bikes[position].marca
 
+        var textViewBikeId = holder.layout.findViewById<TextView>(R.id.textViewBikeId)
+        textViewBikeId.text = bikeList.bikes[position].id
+
         var imgViewBike = holder.layout.findViewById<ImageView>(R.id.imageViewBike2)
         Glide
             .with(holder.itemView.context)
@@ -41,7 +44,7 @@ class ItemListAdapter(context: AppCompatActivity,
             .into(imgViewBike)
 
         holder.layout.setOnClickListener{
-            Toast.makeText(holder.itemView.context, textViewBikeName.text, Toast.LENGTH_LONG).show()
+            Toast.makeText(holder.itemView.context, textViewBikeName.text.toString() + textViewBikeId.text, Toast.LENGTH_LONG).show()
         }
     }
 
