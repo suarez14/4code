@@ -46,6 +46,12 @@
                 android:textColor="@color/purple_700"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/textViewBikeId"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible"/>
+
         </LinearLayout>
 
     </LinearLayout>

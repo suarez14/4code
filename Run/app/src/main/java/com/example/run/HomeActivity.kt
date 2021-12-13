@@ -68,11 +68,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             //}
         }*/
 
-        button.setOnClickListener {
-            Firebase.auth.signOut()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
+
     }
     //Metodo para obtener los datos del perfil de usuario
     private fun getUserProfile(){
@@ -124,13 +120,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
 
-            R.id.op1Nav -> textView.text = "Perferences"
+
             R.id.op2Nav ->  {   Firebase.auth.signOut()
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }
-            R.id.op3Nav  -> textView.text = "User Date"
-            else -> textView.text = "Home"
+
         }
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.activity_home)

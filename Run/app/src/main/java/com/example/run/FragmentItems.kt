@@ -68,7 +68,8 @@ class FragmentItems : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    var bike:Bike = Bike(document.getString("Nombre")!!,
+                    var bike:Bike = Bike(document.id,
+                                         document.getString("Nombre")!!,
                                          document.getString("Marca")!!,
                                          document.getLong("Modelo")!!.toInt(),
                                          document.getLong("Kilometraje")!!.toInt(),
@@ -80,7 +81,6 @@ class FragmentItems : Fragment() {
                 products = BikeList(productsList)
                 var info: Bundle = Bundle()
                 info.putParcelable("products", products)
-                Toast.makeText(context, "So far, so good...", Toast.LENGTH_LONG).show()
                 listRecyclerView = requireView().findViewById(R.id.recyclerItemsList)
                 myAdapter = ItemListAdapter(activity as AppCompatActivity, info)
 
